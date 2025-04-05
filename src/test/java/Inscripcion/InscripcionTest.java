@@ -43,7 +43,7 @@ class InscripcionTest {
     }
 
     @Test
-    @DisplayName("Alumno se inscribe a paradigmas sin haber aprobado algoritmos")
+    @DisplayName("Alumno se inscribe a Diseño sin haber aprobado algoritmos")
     public void aprobadaFalse(){
         Alumno alumno = new Alumno();
         alumno.setNombre("Pedro");
@@ -61,8 +61,21 @@ class InscripcionTest {
         materia2.setHorario(LocalTime.of(9, 15, 0));
         materia2.setCorrelativas(List.of(materia1));
 
+        Materia materia3 = new Materia();
+        materia3.setNombre("ADS");
+        materia3.setHorario(LocalTime.of(10, 0, 0));
+        materia3.setCorrelativas(List.of(materia1));
+
+
+        Materia materia4 = new Materia();
+        materia4.setNombre("Diseño");
+        materia4.setHorario(LocalTime.of(10, 0, 0));
+        materia4.setCorrelativas(List.of(materia1,materia2,materia3));
+
         Inscripcion inscripcion = new Inscripcion(alumno);
-        inscripcion.setMaterias(List.of(materia2));
+        inscripcion.setMaterias(List.of(materia4));
+
+        alumno.setMateriasAprobadas(List.of(materia1));
 
         Assertions.assertFalse(inscripcion.aprobada());
     }
@@ -81,8 +94,13 @@ class InscripcionTest {
         materia1.setHorario(LocalTime.of(10, 0, 0));
         materia1.setCorrelativas(List.of());
 
+        Materia materia2 = new Materia();
+        materia2.setNombre("analisis 1");
+        materia2.setHorario(LocalTime.of(10, 0, 0));
+        materia2.setCorrelativas(List.of());
+
         Inscripcion inscripcion = new Inscripcion(alumno);
-        inscripcion.setMaterias(List.of(materia1));
+        inscripcion.setMaterias(List.of(materia1,materia2));
 
         Assertions.assertTrue(inscripcion.aprobada());
     }

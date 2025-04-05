@@ -4,7 +4,6 @@ import Alumno.Alumno;
 import Materia.Materia;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +18,11 @@ public class Inscripcion {
 
 
     public Boolean aprobada() {
+        if(alumno.getMateriasAprobadas().isEmpty() && materias.stream().noneMatch(m -> m.tieneCorrelativas())) {
+            return true;
+        }
         return this.materias.stream().allMatch(materia ->
-                new HashSet<>(Optional.ofNullable(alumno.getMateriasAprobadas()).orElse(List.of()))
-                        .containsAll(Optional.ofNullable(materia.getCorrelativas()).orElse(List.of()))
+                alumno.getMateriasAprobadas().containsAll(Optional.ofNullable(materia.getCorrelativas()).orElse(List.of()))
         );
     }
 

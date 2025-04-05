@@ -4,6 +4,7 @@ import Materia.Materia;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,6 +15,6 @@ public class Alumno {
     private String legajo;
     private String mail;
     @Getter
-    private List<Materia> materiasAprobadas;
+    private List<Materia> materiasAprobadas = new ArrayList<>();
 
 }
